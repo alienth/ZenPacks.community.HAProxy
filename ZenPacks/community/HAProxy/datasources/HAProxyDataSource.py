@@ -96,6 +96,10 @@ class HAProxyDataSource(ZenPackPersistence,
             parts.append('-s')
         if self.url:
             parts.append("-u '%s'" % self.url)
+        if self.server:
+            parts.append("-S '%s'" % self.url)
+        if self.servertype:
+            parts.append("-T '%s'" % self.url)
         cmd = ' '.join(parts)
         cmd = BasicDataSource.BasicDataSource.getCommand(self, context, cmd)
         return cmd

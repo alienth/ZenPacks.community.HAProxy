@@ -83,7 +83,7 @@ class HAProxyDataSource(ZenPackPersistence,
 
 
     def getCommand(self, context):
-        parts = ['check_apache.py']
+        parts = ['check_haproxy.py']
         if self.hostname:
             parts.append('-H %s' % self.hostname)
         if self.port:
@@ -92,10 +92,6 @@ class HAProxyDataSource(ZenPackPersistence,
             parts.append('-s')
         if self.url:
             parts.append("-u '%s'" % self.url)
-        if self.ngregex:
-            parts.append("-r '%s'" % self.ngregex)
-            if self.ngerror:
-                parts.append("-e '%s'" % self.ngerror)
         cmd = ' '.join(parts)
         cmd = BasicDataSource.BasicDataSource.getCommand(self, context, cmd)
         return cmd

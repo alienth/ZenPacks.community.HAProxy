@@ -23,17 +23,19 @@ import os
 
 class HAProxyDataSource(ZenPackPersistence,
                                 BasicDataSource.BasicDataSource):
-    HAPROXY_MONITOR = 'HAProxy'
+    SOURCETYPE = 'HAProxy'
 
     ZENPACKID = 'ZenPacks.community.HAProxy'
 
-    sourcetypes = (HAPROXY,)
-    sourcetype = HAPROXY
+    sourcetypes = (SOURCETYPE,)
+    sourcetype = SOURCETYPE
 
     timeout = 15
     eventClass = '/Status/Web'
 
     hostname = '${dev/manageIp}'
+    server = '${dev/componentId}'
+    servertype = 'BACKEND'
     port = '80'
     ssl = False
     url = '/haproxy_stats;csv'
@@ -45,6 +47,8 @@ class HAProxyDataSource(ZenPackPersistence,
             {'id':'port', 'type':'string', 'mode':'w'},
             {'id':'ssl', 'type':'boolean', 'mode':'w'},
             {'id':'url', 'type':'string', 'mode':'w'},
+            {'id':'server', 'type':'string', 'mode':'w'},
+            {'id':'servertype', 'type':'string', 'mode':'w'},
             )
 
     _relations = BasicDataSource.BasicDataSource._relations + (
@@ -73,7 +77,7 @@ class HAProxyDataSource(ZenPackPersistence,
 
 
     def getDescription(self):
-        if self.sourcetype == self.HAPROXY_MONITOR:
+        if self.sourcetype == self.SOURCETYPE:
             return self.hostname
         return BasicDataSource.BasicDataSource.getDescription(self)
 

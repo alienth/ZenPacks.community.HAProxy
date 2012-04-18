@@ -4,7 +4,7 @@
 # NB: PACKAGES is deprecated
 NAME = "ZenPacks.community.HAProxy"
 VERSION = "0.1"
-AUTHOR = "alienth"
+AUTHOR = "Jason Harvey <alienth@gmail.com>"
 LICENSE = ""
 NAMESPACE_PACKAGES = ['ZenPacks', 'ZenPacks.community']
 PACKAGES = ['ZenPacks', 'ZenPacks.community', 'ZenPacks.community.HAProxy']

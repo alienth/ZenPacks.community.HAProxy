@@ -20,7 +20,7 @@ class HAProxyInstance(HAProxyComponent):
     _relations = HAProxyComponent._relations + (
         ('haproxy_host', ToOne(ToManyCont,
             'Products.ZenModel.Device.Device',
-            'haproxy_instance',
+            'haproxy_instances',
             ),),
         ('haproxy_frontends', ToManyCont(ToOne,
             'ZenPacks.community.HAProxy.HAProxyFrontend.HAProxyFrontend',

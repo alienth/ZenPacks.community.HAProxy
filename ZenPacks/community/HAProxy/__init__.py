@@ -44,4 +44,32 @@ for relname, modname in NEW_DEVICE_RELATIONS:
             )
 
 
+class ZenPack(ZenPackBase):
+    """
+    ZenPack loader that handles custom installation and removal tasks.
+    """
+
+    def install(self, app):
+        super(ZenPack, self).install(app)
+        self._buildDeviceRelations()
+
+    def remove(self, app, leaveObjects=False):
+        if not leaveObjects:
+            # Remove our Device relations additions.
+            Device._relations = tuple(
+                [x for x in Device._relations \
+                    if x[0] not in NEW_DEVICE_RELATIONS])
+
+            self._buildDeviceRelations()
+
+    def _buildDeviceRelations(self):
+        log.info("Rebuilding relations for existing devices")
+        for d in self.dmd.Devices.getSubDevicesGen():
+            d.buildRelations()
+
+
+# We need to filter HAProxy components by id instead of name.
+EventManagerBase.ComponentIdWhere = (
+    "\"(device = '%s' and component = '%s')\""
+    " % (me.device().getDmdKey(), me.id)")
 

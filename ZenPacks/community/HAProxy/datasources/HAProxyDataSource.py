@@ -27,8 +27,8 @@ class HAProxyDataSource(ZenPackPersistence,
 
     ZENPACKID = 'ZenPacks.community.HAProxy'
 
-    sourcetypes = (HAPROXY_MONITOR,)
-    sourcetype = HAPROXY_MONITOR
+    sourcetypes = (HAPROXY,)
+    sourcetype = HAPROXY
 
     timeout = 15
     eventClass = '/Status/Web'

@@ -14,6 +14,13 @@ from Products.ZenRelations.RelSchema import ToManyCont, ToOne
 from .HAProxyComponent import HAProxyComponent
 
 
+
+#3###########3
+## Instance should just contain 'servers'
+## Servers can be of the type BACKEND, FRONTEND, or SERVER
+## but they all track similar attributes.
+## The component list should sort by type, so that FRONTEND and BACKEND are at the top
+
 class HAProxyInstance(HAProxyComponent):
     meta_type = portal_type = "HAProxyInstance"
 
